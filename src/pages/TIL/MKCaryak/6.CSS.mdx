@@ -175,8 +175,6 @@ page의 width 값이 특정 값 이상일때만 cell로 보여주기, 아니면 
 </table>
 ```
 
-위 코드의 title 과 email 파트가 해당하는 속성
-
 ## display:clear_fix & display:flow_root
 
 what is clear fix
@@ -199,11 +197,11 @@ While you can usually build crafted-design with set of contained css file, once 
 
 of course you can use that specific pixel to add that pixel value in global css, but if you using that specific value during project only one time, it has not good efficiency. Also making that globall css hard
 
-In this case, you find really need something like `padding-top-77px`,
+In this case, if you find need to make style CSS code as `padding-top-77px`,
 use square bracket notation to generate a tailwind class with any arbitary value.
 
 ```javascript
-<div className="pt-[123px]">{data}</div>
+<div className="pt-[77px]">{data}</div>
 ```
 
 not only for pixel, you can use arbitary value in many case
@@ -229,3 +227,18 @@ when propeeties are not added in global.css add properties in square bracket not
 ### 3.Arbitary variants
 
 Lastly, create the corresponding `theme.config.tsx` file in your project's root directory.
+
+### No scrollbar but still exist scroll function
+
+Unfortunately, I couldn't find how to use `webkit` option in className of '<div/>',
+so, generally I used easiest way to put in 'global.css'
+
+```javascript
+.no_scroll_bar::-webkit-scrollbar {
+  display : none;
+  }
+```
+
+and then use that 'no_scroll_bar' which class have 'overflow scroll or auto' options.
+
+Then you can see no scroll bar, but have scroll function
