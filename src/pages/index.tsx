@@ -39,7 +39,7 @@ const MainPage: NextPage<any> = (props) => {
     <>
       <div className={styles.wrap}>
         <div className={scroll ? styles.header_white : styles.header}>
-          <div className={styles.header_target_indiv}>NHK's Portfolio</div>
+          <div className={styles.header_target_indiv}>NHK&apos;s Portfolio</div>
           <div className={styles.header_target}>
             <div className={styles.header_target_indiv}>About me</div>
             <div
