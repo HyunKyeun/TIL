@@ -57,7 +57,7 @@ const MainPage: NextPage<any> = (props) => {
           <div className={styles.block}>
             <div>
               <div>About Me</div>
-              <div>준비중입니다.</div>
+              <div>준비중입니다 기다려주세용</div>
             </div>
           </div>
         </main>
