@@ -1,0 +1,61 @@
+.wrap,
+.modal__wrap {
+  font-family: "SUIT Variable", sans-serif;
+  @apply text-gray-900;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  justify-content: space-between;
+  padding: 0.5rem 0rem;
+  border-bottom: solid;
+  border-bottom-color: #959da5;
+  height: 3rem;
+  transition-property: all;
+  transition-duration: 150ms;
+}
+.header_white {
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  background-color: #ffffff;
+  justify-content: space-between;
+  padding: 0.5rem 0rem;
+  border-bottom: solid;
+  border-bottom-color: #959da5;
+  height: 3rem;
+  transition-property: all;
+  transition-duration: 150ms;
+}
+
+.header_target {
+  display: flex;
+}
+.header_target_indiv {
+  padding: 1rem;
+}
+.header_target_indiv:hover {
+  padding: 1rem;
+  color: #a5ada5;
+  cursor: pointer;
+}
+.content {
+  height: (100vh - 4rem);
+  overflow-y: auto;
+}
+.block {
+  padding-top: 4rem;
+  display: flex;
+  justify-content: center;
+  height: 1000px;
+  background-color: #bbbbbb;
+  opacity: 0.5;
+}
