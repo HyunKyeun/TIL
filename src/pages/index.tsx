@@ -45,10 +45,10 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className={styles.header_target_indiv}
               onClick={() => {
-                router.push("/skills");
+                router.push("/blogs");
               }}
             >
-              Skills
+              Blogs
             </div>
             <div className={styles.header_target_indiv}>Archive</div>
           </div>

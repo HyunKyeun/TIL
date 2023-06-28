@@ -46,6 +46,7 @@
   padding: 1rem;
   color: #a5ada5;
   cursor: pointer;
+  white-space: nowrap;
 }
 .content {
   height: (100vh - 4rem);
@@ -56,6 +57,4 @@
   display: flex;
   justify-content: center;
   height: 1000px;
-  background-color: #bbbbbb;
-  opacity: 0.5;
 }

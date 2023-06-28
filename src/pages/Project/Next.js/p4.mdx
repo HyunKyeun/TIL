@@ -1,0 +1,70 @@
+# useQuery,useMutation
+
+React-Query는 비 동기 로직을 효율적으로 다룰 수 있게 해주는 라이브러리이다.
+
+## 설치
+
+```console
+$ npm i react-query
+$ yarn add react-query
+```
+
+프로젝트 패키지 관리자에 따라 맞게 라이브러리 설치
+
+## 기본 셋팅
+
+가장 최상단 page에서 보통 `app.js, app.tsx`에 QueryClientProvider로 앱을 감싸야 한다.
+쿼리 인스턴스 생성후 그 인스턴스를 provider에 넣는것으로 기본 셋팅 끝.
+
+```javascript
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Children />
+    </QueryClientProvider>
+  );
+}
+```
+
+## userQuery
+
+    - `GET` 요청과 같은 read 작업을 할 때 사용한다.
+
+```javascript
+//예시 1
+const getReservationList: any = useQuery(
+  ["getReservationList"],
+  () => _aGetReservation(param),
+  {
+    enabled: true,
+  }
+);
+```
+
+    - 파라미터로 Querykey가 배열 형태로 들어가야하며, 두번째 파라미터에는 api 호출 함수가 들어간다.
+    - 옵션 파라미터에, 해당 api 호출 성공시, 실패시, 로딩시는 물론 해당 useQuery의 조건도 설정 할 수 있다.
+    - UseQuery는 비동기로 작동한다. 한 컴포넌트에 여러 useQuery가 있으면, 하나 끝나고 다음 하나를 실행하는 것이 아니라, 동시에 실행하다.
+      이때는 useQueries를 사용한다.
+    - enabled 옵션을 이용하면 동기적으로 사용할 수 있다.
+
+### QueryKey
+
+useQuery는 이 key값을 기반으로 데이터 캐싱을 관리환다.  
+문자열, 배열로 지정하여 사용할수 있으며, 첫번째 파라미터로 설정한 해당 key값을 통해  
+기본 셋팅 최상단 app.tsx파일 에 설정해둔 provider를 통해 다른 컴포넌트에서 해당 key값 만으로도 데이터를 불러올 수 있다.
+
+### Query Functions
+
+두번째 파라미터에 사용하는 인자로 promise를 반환하는 함수를 넣어야한다.
+위 예시의 경우 `_aGetReservation`이 해당하는 함수이며, 해당 프로젝트에서는 `axios.get`으로 받아왔다.
+
+### Query Options
+
+    - **enabled(boolean)**
+
+    쿼리 자동실행 유무를 선택 가능하다. 기본값이 true이기에 이를 고려하여 사용 가능.
+
+    - **retry (boolean|number)**
