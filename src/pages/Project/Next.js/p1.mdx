@@ -160,7 +160,27 @@ const getReverseGeoLocation = useQuery(
 ```
 
 해당 Client Id, secret은 네이버 클라우드 api에서 셋팅후 axios 설정,
-userQuery로 axios 결과값 관리  
+userQuery로 axios 결과값 관리
+Front - Back 간의 통신이 아닌, Front - Naver와의 외부 Api 통신이기 때문에 CORS 에러가 발생한다.  
+이를 방지하기위해 `next.config.js`파일에 해당 주소로 올때는 해당 주소로 변경하여 보낸다라는 `rewrites`를 이용한다.
+
+```javascript
+  rewrites: () => {
+    return [
+      {
+        source: "/geo",
+        destination:
+          "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode",
+      },
+      {
+        source: "/reversegeo",
+        destination:
+          "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc",
+      },
+    ];
+  },
+```
+
 getAddressFromGps()의 경우 JSON으로 돌아온 값을 프로젝트에 맞게 주소값 을 시,도,군,구만 빼는 임의의 함수이다. ex) 대전광역시 유성구
 
 ```javascript
