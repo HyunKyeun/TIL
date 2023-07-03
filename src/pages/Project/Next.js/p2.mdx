@@ -37,34 +37,34 @@ ex) twitter://signup = 트위터라는 앱의 사인업 페이지를 열어라!
 ```javascript
 /**
  * 웹에서 앱으로 연결 및 미설치시 네이버 지도 설치
- * @param startLat 시작점 위도 ("-1 임의의 값")
- * @param startLng 시작점 경도 ("-1 임의의 값")
- * @param startAddress 시작점 주소 (""일 경우  내 위치)
- * @param endLat 도착점 위도 ("-1" 일 경우 도착점 주소로 위도 받아오기)
- * @param endLng 도착점 경도 ("-1" 일 경우 도착점 주소로 경도 받아오기)
- * @param endAddress 도착점 주소
+ * @param sLat 시작점 위도 ("-1 임의의 값")
+ * @param sLng 시작점 경도 ("-1 임의의 값")
+ * @param sAddress 시작점 주소 (""일 경우  내 위치)
+ * @param eLat 도착점 위도 ("-1" 일 경우 도착점 주소로 위도 받아오기)
+ * @param eLng 도착점 경도 ("-1" 일 경우 도착점 주소로 경도 받아오기)
+ * @param eddress 도착점 주소
  * @param IsOpenMap 길찾기 또는 지도 (true : 지도, false : 길찾기)
  * @returns void
  */
 export const deepLink = async (
-  startLat: number,
-  startLng: number,
-  startAddress: string,
-  endLat: number,
-  endLng: number,
-  endAddress: string,
+  sLat: number,
+  sLng: number,
+  sAddress: string,
+  eLat: number,
+  eLng: number,
+  eAddress: string,
   IsOpenMap: boolean
 ): Promise<void> => {
   /*********************************************************************
    *1. Init
    *********************************************************************/
   // 앱 설치 되어있나 여부 확인 안하고 앱 실행 함수, 앱 설치 여부 함수 실행
-  let slat = startLat;
-  let slng = startLng;
-  let saddress = startAddress.split("(")[0];
-  let elat = endLat;
-  let elng = endLng;
-  let eaddress = endAddress.split("(")[0];
+  let slat = sLat;
+  let slng = sLng;
+  let saddress = sAddress.split("(")[0];
+  let elat = eLat;
+  let elng = eLng;
+  let eaddress = eAddress.split("(")[0];
   let url: string = "";
   // 스타트 지점 주소
   if (saddress === "") {
@@ -119,11 +119,10 @@ export const deepLink = async (
   const openMobileMap = () => {
     if (isIOS) {
       url = `nmap://place?lat=${elat}&lng=${elng}&name=${eaddress}&appname=com.example.myapp`;
-      location.href = url;
     } else {
       url = `nmap://place?lat=${elat}&lng=${elng}&name=${eaddress}`;
-      location.href = url;
     }
+    location.href = url;
   };
 
   const openWebMap = () => {
@@ -138,11 +137,10 @@ export const deepLink = async (
     } else {
       if (isIOS) {
         url = `nmap://route/car?slat=${slat}&slng=${slng}&sname=${saddress}&dlat=${elat}&dlng=${elng}&dname=${eaddress}&appname=com.example.myapp`;
-        location.href = url;
       } else {
         url = `nmap://route/car?slat=${slat}&slng=${slng}&sname=${saddress}&dlat=${elat}&dlng=${elng}&dname=${eaddress}`;
-        location.href = url;
       }
+      location.href = url;
     }
   };
   const openWebFind = () => {

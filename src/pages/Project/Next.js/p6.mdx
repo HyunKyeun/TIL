@@ -1,0 +1,85 @@
+# Experession and Operator
+
+if, else if, else 등등 문으로 사용하는것과 달리 연산자를 이용하여 분류  
+if 대신 연산자를 써야한다! 라던가 if쪽이 당연하 라는 것은 없기에 상황에 맞게 쓰면 된다고 본다.
+
+## ==
+
+```javascript
+console.log("1" == 1);
+//true
+```
+
+이 경우 1 은 1 이랑 같나? 이고
+
+```javascript
+console.log("1" === 1);
+//false
+```
+
+이 경우 문자 1 은 숫자 1이랑 같나? 라는 뜻
+
+=== 을 쓰면 value 값 뿐만아니라 Type까지 맞는지 확인가능
+
+---
+
+```javascript
+const string1 = "hello";
+const string2 = String("hello");
+const string3 = new String("hello"); //객체 α
+const string4 = new String("hello"); //객체 β
+
+console.log(string1 == string2); // true
+console.log(string1 == string3); // true
+console.log(string2 == string3); // true
+console.log(string3 == string4); // false
+```
+
+문자열 과 string 객체를 비교할경우 해당 객체를 문자열로 변환 후 비교를 하게 된다.  
+그러나 둘다 객체의 경우, 해당 객체가 동일한 객체를 참조하는가를 비교하는데 위의 3,4의 경우 다른 객체를 보고있기에 false
+
+---
+
+```javascript
+const date = new Date("December 22, 2023 12:34:00");
+const string = d.toString();
+console.log(date == string); //true
+```
+
+위에서 == 이 실행 되는 방식을 date 형식으로 표현
+===으로 확인시 type까지 확인하니 false로 나온다.
+
+## ?
+
+물음표는 보통 삼항 연산자를 사용할때 사용하는데
+
+```javascript
+const check = (list) => {
+  const A = "123";
+  let checkList = "";
+  checkList = A == list.a ? true : false;
+  return checkList;
+};
+```
+
+조건문으로 많이 사용하게 된다.
+
+그 외에도 `detail.docs.data`와 같이 json을 볼때  
+docs 까지는 있으나 ,data 가 없을경우 문제가 발생하게 된다.
+
+이럴경우 에러를 발생하며 해당 로직이 돌아가지 않거나, 심한 경우 해당 페이지 렌더링 자체가 취소 될 경우도 있다.
+
+이 때 `detail.docs?.data` 같이 `?`을 넣어주게 되면, docs에 data가 있는지 체크를 먼저 확인하고
+그후에 그 data를 사용하게 된다.
+
+정확히는 그 data 유무 확인 처리후 없을 때 처리방법, 있을 때 처리방법으로 구분해두는것이 좋으나  
+임시 방편으로 ?을 넣음으로써 치명적인 에러를 회피하는 방법이 될 수도 있다.
+
+## Nullish Coalescing Operation
+
+병합 연산자 `??` 는 연산자 왼쪽이 존재.. 즉 true인 경우 해당 값을 return, 그 외에는 연산자 오른쪽 값을 출력하게 된다.
+
+그런데 병합 논리 연산자의 경우 `||` 왼쪽값이 존재하나, false값인 경우애 해당 값을 return한다.
+단순한 false, null, undefind 등이라 생각하고 만들면 에러를 발생할 가능성이 있다.
+
+또한 연산자 우선 순위중 `||` 보다 낮고, 삼항 연산자보다는 높은 위치에 속해있어, 사용에 주의해야한다.

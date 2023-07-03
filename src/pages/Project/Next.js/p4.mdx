@@ -35,13 +35,9 @@ export default function App() {
 
 ```javascript
 //예시 1
-const getReservationList: any = useQuery(
-  ["getReservationList"],
-  () => _aGetReservation(param),
-  {
-    enabled: true,
-  }
-);
+const getReList: any = useQuery(["getResList"], () => _aGetRes(param), {
+  enabled: true,
+});
 ```
 
     - 파라미터로 Querykey가 배열 형태로 들어가야하며, 두번째 파라미터에는 api 호출 함수가 들어간다.
@@ -96,7 +92,7 @@ useQuery는 이 key값을 기반으로 데이터 캐싱을 관리환다.
 - `POST,PATCH,DELETE` 요청과 같은 변경, 수정 작업을 할 때 사용한다.
 
 ```javascript
-const list = useMutation(_aPatchList, "callBack Fun");
+const list = useMutation(_aPatchList, "callBack Function");
 ```
 
 return 값은 useQuery와 동일, mutate 함수로 요청이 이뤄진다.

@@ -12,17 +12,17 @@ import { Steps } from "nextra-theme-docs";
 ## 0. Setting
 
 ```javascript
-interface geoDataType {
+interface geoType {
   coords: string; // "longtitude,latitude"
-  address1: string; // 추출한 시 도
-  address2: string; //추출한 군 구
+  adr1: string; // 추출한 시 도
+  adr2: string; //추출한 군 구
   data: any; //api 결과값 데이터
   length: number; // 결과값의 data.length
 }
 const datainit: geoDataType = {
   coords: null,
-  address1: null,
-  address2: null,
+  adr1: null,
+  adr2: null,
   data: null,
   length: 0,
 };
@@ -46,8 +46,8 @@ const success = (position) => {
 const error = (error) => {
   setData({
     ...data,
-    address1: "-",
-    address2: "-",
+    adr1: "-",
+    adr2: "-",
   });
 };
 // navigator 실행
@@ -113,7 +113,7 @@ https로 배포될 예정이기에 자연스럽게 해결
  * @returns api orders에 적은 순서대로 가능한 결과값 리스트 // return 잠시 보류
  */
 
-export const _aGetReverseGeoLocation = async (coords: string) => {
+export const _aGetReGeoLoca = async (coords: string) => {
   const res = await axios
     .get(
       `/reversegeo?coords=${coords}&output=json&orders=roadaddr,legalcode,admcode`,
@@ -130,26 +130,26 @@ export const _aGetReverseGeoLocation = async (coords: string) => {
 };
 
 const getReverseGeoLocation = useQuery(
-  ["getReverseGeoLocation"],
-  () => _aGetReverseGeoLocation(coords),
+  ["getReGeoLoca"],
+  () => _aGetReGeoLoca(coords),
   {
     enabled: false,
     onError: (e) => {
       coords = "";
     },
 
-    onSuccess: async (res: reverseGeocodingResponse) => {
+    onSuccess: async (res: Response) => {
       if (res.status.code !== 0) {
         coords = "";
         return false;
       }
-      const result = getAddressFromGps(res);
+      const result = getAdrFromGps(res);
 
       if (result !== undefined) {
         setData({
           ...data,
-          address1: result.address.split(" ")[0],
-          address2: result.address.split(" ")[1],
+          adr1: result.address.split(" ")[0],
+          adr2: result.address.split(" ")[1],
           data: res,
           length: res.results.length,
         });
@@ -181,7 +181,7 @@ Front - Back 간의 통신이 아닌, Front - Naver와의 외부 Api 통신이�
   },
 ```
 
-getAddressFromGps()의 경우 JSON으로 돌아온 값을 프로젝트에 맞게 주소값 을 시,도,군,구만 빼는 임의의 함수이다. ex) 대전광역시 유성구
+getAdrFromGps()의 경우 JSON으로 돌아온 값을 프로젝트에 맞게 주소값 을 시,도,군,구만 빼는 임의 제작한 함수이다. ex) 대전광역시 유성구
 
 ```javascript
 /**
@@ -189,7 +189,7 @@ getAddressFromGps()의 경우 JSON으로 돌아온 값을 프로젝트에 맞게
  * @param data 네이버 reversegeo로 받아온 success data
  * @returns
  */
-export const getAddressFromGps = (data: reverseGeocodingResponse) => {
+export const getAdrFromGps = (data: Response) => {
   interface address {
     address: string;
   }
@@ -209,29 +209,21 @@ export const getAddressFromGps = (data: reverseGeocodingResponse) => {
 # 3. 검사소 리스트 CSV to JSON, 시도 군구 JSON 제작
 
 ```javascript
-export interface CarCenterListType {
+export interface CenterListType {
   trial: string;
   city: string;
-  stationName: string;
-  stationNum: string;
-  stationAddr: string;
-  "정기검사 여부"?: boolean;
-  "종합검사 여부"?: boolean;
-  "종합(대형) 여부"?: boolean;
-  "이륜차검사 여부"?: boolean;
+  sName: string;
+  sNum: string;
+  sAddr: string;
 }
 
-export const carCenterList: CarCenterListType[] = [
+export const CenterList: CenterListType[] = [
   {
     trial: "서울",
     city: "도봉",
-    stationName: "xxxxxxxxxxxx",
-    stationNum: "02-000-0000",
-    stationAddr: "서울특별시 도봉구 ~~~~~ ~~~~~",
-    "정기검사 여부": true,
-    "종합검사 여부": true,
-    "종합(대형) 여부": true,
-    "이륜차검사 여부": true,
+    sName: "xxxxxxxxxxxx",
+    sNum: "02-000-0000",
+    sAddr: "서울특별시 도봉구 ~~~~~ ~~~~~",
   },
   ....
 ]
@@ -245,7 +237,6 @@ export interface SubRegion {
   key: number;
   subName: string;
   subValue: string;
-  COM?: boolean; // 종합부하 유무
 }
 
 export interface MainRegionlist {

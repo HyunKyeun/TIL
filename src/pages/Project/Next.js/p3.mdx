@@ -8,7 +8,7 @@ JSON, 리스트등을 CSV파일로 다운받는용
 $ npm react-csv
 ```
 
-스크립트를 이용하여 리스트 생성 추가후 export하는 형식이 아닌 npm의 힘을 빌렸다.
+스크립트를 이용하여 리스트 생성 추가후 export하는 형식이 아닌 npm으로 추가하여 사용하였다.
 
 ## 사용법
 
@@ -64,7 +64,7 @@ confirm을 통해 무분별한 다운로드를 방지, true의 경우애만 다�
 
 ```javascript
 // summary csv 만들기
-const createCSVFile = async (datalist: SettlementFindResult<Settlement>) => {
+const createCSVFile = async (datalist: Result<data>) => {
   let head = [{ label: "date", key: "date" }];
 
   let data = [];
