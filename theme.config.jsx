@@ -2,16 +2,16 @@
 export default {
   editLink: { text: "" },
   feedback: { content: "" },
-  logo: <strong>개발새발</strong>,
+  logo: <strong>About Me</strong>,
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – HyunKyeun.Na",
+      titleTemplate: "%s – minhyeok.lee1",
     };
   },
   sidebar: {
     toggleButton: true,
   },
   footer: {
-    text: <span>© 2023 HyunKyeun Na</span>,
+    text: <span>© 2023 HyunKyeun</span>,
   },
 };
