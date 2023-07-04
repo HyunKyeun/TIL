@@ -47,9 +47,7 @@ const MainPage: NextPage<any> = (props) => {
           <div>NHK&apos;s Portfolio</div>
 
           <div className="flex">
-            <div className="px-2 cursor-pointer hover:text-gray-600">
-              About me
-            </div>
+            <div className="px-2 text-gray-600 cursor-pointer">About me</div>
             <div
               className="px-2 cursor-pointer hover:text-gray-600"
               onClick={() => {

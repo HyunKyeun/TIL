@@ -5,7 +5,7 @@ export default {
   logo: <strong>About Me</strong>,
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – minhyeok.lee1",
+      titleTemplate: "%s – HyunKyeun Na",
     };
   },
   sidebar: {
