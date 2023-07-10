@@ -4,5 +4,10 @@
   "p2": "Deep Link",
   "p3": "CSV DownLoad",
   "p4": "React Query",
-  "p5": "CSS"
+  "p5": "CSS",
+  "p6": "Operator",
+  "p7": "Recoil",
+  "p8": "접근제한자",
+  "p9": "Enum",
+  "p10": "Scroll"
 }

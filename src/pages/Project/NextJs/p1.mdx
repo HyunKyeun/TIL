@@ -61,7 +61,7 @@ const findingAddress = () => {
 };
 ```
 
-options의 경우 추가 기능으로 <a>https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition</a>에서 확인
+options의 경우 [추가 기능](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition)에서 확인
 
 성공시 해당 위치의좌표값을 가져와서 성공한다.
 
@@ -96,11 +96,8 @@ to a secure origin, such as HTTPS.
 ```
 
 기능 구현 테스트할때는 localhost에서 연습하기 때문에 몰랐는데 build후 배포하고 나서 이후에 알게된 문제점  
-해당페이지가 http://abcd.com 형태인 경우 현재 위치를 불러올수 없는 문제
+해당페이지가 http://abcd.com 형태인 경우 [현재 위치를 불러올수 없는 문제](https://medium.com/witinweb/http-프로토콜-사용시-html5-geolocation-api-등-위치정보-사용제한에-대하여-e024772cc280)
 
-<a>
-  https://medium.com/witinweb/http-프로토콜-사용시-html5-geolocation-api-등-위치정보-사용제한에-대하여-e024772cc280
-</a>
 요약하자면 보안 이슈로 인해 localhost를 제외한 http:// 에서는 사용 불가능 해당 프로젝트는
 https로 배포될 예정이기에 자연스럽게 해결
 

@@ -39,8 +39,8 @@ const MainPage: NextPage<any> = (props) => {
     <>
       <div
         className={classNames(
-          scroll ? "bg-white border-b" : "",
-          "page__header transition-all"
+          scroll ? "bg-yellow-500" : "",
+          "page__header transition-all border-b"
         )}
       >
         <nav className="page__header--inner">
@@ -63,12 +63,28 @@ const MainPage: NextPage<any> = (props) => {
         </nav>
       </div>
       <main className="page__content">
-        <div>
+        <section className="w-full">
           <div>
-            <div>About Me</div>
-            <div>준비중입니다 기다려주세용</div>
+            <div className="flex text-[32px] py-2">
+              신중을 기하는 프론트엔드 개발자
+            </div>
           </div>
-        </div>
+
+          <div className="w-full py-2 border-t">
+            <div className="flex flex-col justify-between py-1 md:flex-row">
+              <div className="w-full p-2 bg-red-100 md:w-1/2">About Me</div>
+              <div className="w-full p-2 bg-green-100 md:w-1/2">
+                준비중입니다 기다려주세용
+              </div>
+            </div>
+            <div className="flex flex-col justify-between py-1 md:flex-row">
+              <div className="w-full p-2 bg-red-100 md:w-1/2">About Me</div>
+              <div className="w-full p-2 bg-green-100 md:w-1/2">
+                준비중입니다 기다려주세용
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

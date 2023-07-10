@@ -1,0 +1,53 @@
+# Recoil
+
+## Intro
+
+전역으로 상태 관리를 해주는 라이브러리이다.
+
+전역으로 관리해주기에 컴포넌트 최상단의 부모트리에 `RecoilRoot`가 필요하다.
+
+```javascript
+//_app.tsx
+<RecoilRoot>
+  <Component {...pageProps} />
+</RecoilRoot>
+```
+
+프로젝트 내의 최상단 컴포넌트, 이 경우 `_app.tsx`의 컴포넌트를 `RecoilRoot`로 감싸주면 기본 셋팅 끝.
+
+## Atom
+
+한 컴포넌트내에서는 상태를 관리하는 `useState`가 있다면 atom은 `RecoiRoot`로 감싸진 컴포넌트 내부의 상태를 관리한다.
+atom이 변화하면 해당 atom을 사용하는 컴포넌트는 렌더링을 다시 하게된다.
+
+```javascript
+//ex ) 관리된 atom 이름 open default 값 false
+export const atomOpen = atom({
+  key: `atomOpen/${v1()}`,
+  default: false,
+});
+```
+
+atom을 불러오거나 쓰기위해서는 `useRecoilState()`을 이용해야 하며
+
+```javascript
+const [open, setOpen] = useRecoilState(atomOpen);
+```
+
+사용 방법은 useState와 크게 다르지 않다.
+
+그러면 해당 atom을 만들때 선언해줘야할 항목으로 `key`, `default`값이 있다.
+
+`key`: 고유한 키 값, `default` : 해당 아톰이 불러와질때 들고 있을 값
+
+## Selector
+
+selector는 기존에 선언한 atom을 처리하여 새로운 값으로 return하거나 atom값을 수정 하는데 사용한다.
+즉 위에서 설명한것처럼 useState형태로 사용하는것 외에 Doc에서 설명한 사용법느오는 Selector를 사용하는것이 맞는것 같다.
+
+atom값이 최신화 되면 자동으로 selector값도 변하게 된다.
+
+이 selector를 프로젝트에서 사용하지는 않았으나, 예를 들면 환전 시스템에 이 selector를 사용하면 좋은 사례가 될 것 같다.
+
+기준이 되는 통화를 설정 후 selector로 변환하여 보여주면 되기에
+매번 환율에 따라 값을 바꾸는것 보다 환율이 변경되면 그 환율을 selector에 저장만 하면 되서 더욱 간단할 것이라 생각된다.

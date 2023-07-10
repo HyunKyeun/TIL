@@ -1,0 +1,90 @@
+# GIT
+
+소스코드 관리 서비스
+
+git이 무엇이며, 이것을 왜 써야하는지 등의 이유는 제외,
+
+프로젝트 진행하며 이해한 git과, 그 명령어 등을 적어두고자 한다.
+
+물론 실제 의미의 뜻을 이용한다기보단 추상적으로 설명하고자 하였기에 실제 돌아가는 시스템과는 다를 수 있다.
+
+## Git Clone, init
+
+github에 새롭게 저장소를 작성할땐 git init
+github애 저장된 저장소를 복제할땐 git clone
+
+## Add, Commit, Push, Pull
+
+- Add : 파일의 변경사항을 인덱스에 저장
+
+- Commit : 인덱스에 저장된 파일의 변경 사항(파일 포함)을 (내부)저장소에 저장
+
+- Push : (내부)저장소에 저장된 파일의 변경 사항을 원격 저장소에 업로드
+
+- Pull : (내부)저장소에 저장된 파일의 변경 사항과 원격 저장소에 저장된 다른 내용을 다운로드
+
+## Git Status
+
+이 명령어를 치면, 원격 저장소의 상태와 내부 저장소의 상태를 비교하여, 차이점을 콘솔창에 보여준다.
+
+```console
+ ../../page.tsx (changed)
+ ../../delete.tsx (deleted)
+```
+
+## git 사용자 세팅
+
+프로젝트 진행시 개인 아이디로 repo를 만들고 하는 대신, 회사 ID로 생성된 repo에 개인이 초대되어 하는 방식을 이용한다.
+
+따로 설정을 하지 않고 push, commit을 하게되면 회사 계정의 commit이 올라가기에, 추후 관리가 어렵다.
+
+그럴때를 위한 사용자 설정
+
+```console
+git config --list
+
+user.email=@@
+user.name=@@@
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=@@@@
+remote.origin.fetch=@@@@
+```
+
+리스트를 확인해 보면 여러 설정을 확인 가능하며, 이를 수정하면 완료
+
+```console
+$ git config user.name "my git NickName"
+$ git config user.email "my git email"
+```
+
+등록후 리스트를 다시 조회 해보면, user.email이 기본 하나있고 아래에 하나 더 추가된 것을 확인 할 수 있다.  
+위에 있는 user.name,email은 global로 적용된 이메일, 로컬 서버에서 작업시 보통 회사 아이디  
+아래에 있는 user.name,email은 local로 적용된 이메일, 위의 콘솔 명령어에 해당하며,  
+local user를 적용해 두었다면 commit시 해당 유저의 이름으로 올라간다.
+
+```console
+$ git remote -v
+
+origin  github.com/~ (fetch)
+origin  github.com/~ (push)
+sub  github.com/@ (fetch)
+sub  github.com/@ (push)
+```
+
+해당 origin이라는 저장소에서 또는 저장소에 fetch나 push할 것이다 라는 뜻
+
+## Pull and fetch
+
+기본적으로는 원격저장소에서 fetch 명령어로 해당 원격소에서 가져온다.  
+그 후 비교하는 작업을 가져 새로운 버전이다라고 판단 된 경우 merge를 통해 새로운 코드, 파일로 교체  
+실제 파일이 교체된다. 이 일련의 과정을 pull이라고 한다.
+
+```console
+$ git pull origin master
+$ git pull <원격 저장소 명> <원격 저장소 내 branch 명>
+```
+
+기본적으로 사용할경우 사용하는 pull 사용하는 저장소 명과 branch를 구분하여 사용하면 된다.

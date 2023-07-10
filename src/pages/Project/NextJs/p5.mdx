@@ -1,6 +1,8 @@
-# Styled-Component vs TailWindCss
+# CSS
 
-## Styled-Component
+## Styled-Component vs TailWindCss
+
+### Styled-Component
 
 - 페이지에서 렌더링되는 요소에 맞춰 자동으로 해당 스타일만 삽입, 그때그때 필요한 스타일을 로드
 - 스타일에대한 고유 클래스명을 생성, 중복이나 오타 없음
@@ -8,7 +10,7 @@
 - 동적 스타일링이 편하다. (~~~가 있으면 A속성 ~~~가 없으면 B속성)
 
 ```
-$ npm i styled-components
+$ npm install styled-components
 ```
 
 사용법 :
@@ -41,7 +43,7 @@ const AnimatedButton = styled(Button)`
 
 ## Tailwind
 
-## 1. 설치
+### 1. 설치
 
 해당 프로젝트에 설치
 
@@ -50,7 +52,7 @@ $ npm install -D tailwindcss postcss autoprefixer
 
 ```
 
-## 2. tailwin.config
+### 2. tailwin.config
 
 ```
 $ npx tailwindcss init -p
@@ -76,13 +78,13 @@ module.exports = {
 
 설정
 
-## 3. postcss-import ???
+### 3. postcss-import ???
 
 ```
 $ npm install -D postcss-import
 ```
 
-## 기타 설정
+### 기타 설정
 
 확장 탭에서
 
@@ -127,7 +129,7 @@ tailwind 특징 상 알아보기 힘들 클래스명들을 확인 및 어떤것�
 <div className="bg-black/25 pl-3 mt-2 firs " />
 ```
 
-## 테이블 사이즈별로 표현해주는 row를 구분하고 싶을때
+### **사이즈별 반응형 테이블**
 
 "hidden"으로 미리 가리고 나서 -> "lg:table-cell"로 표현
 
@@ -152,63 +154,34 @@ page의 width 값이 특정 값 이상일때만 cell로 보여주기, 아니면 
       </th>
     </tr>
   </thead>
-  <tbody>
-    {people.map((person, personIdx) => (
-      <tr key={person.email}>
-        <td
-          className={
-            "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
-          }
-        >
-          {person.name}
-        </td>
-        <td
-          className={
-            "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell"
-          }
-        >
-          {person.email}
-        </td>
-      </tr>
-    ))}
-  </tbody>
+  <tbody></tbody>
 </table>
 ```
 
-## display:clear_fix & display:flow_root
+### Coustom values
 
-what is clear fix
+#### 1. Using Arbitary Values
 
-what is flow root
+프로젝트 진행하면서 CSS 사용할때 보통 컴포넌트 형태로 만들어서 해당 속성을 불러오는 형태로 사용한다.  
+즉 매번 여기는 2px 저기는 4px를 적는 hardcoding형태를 사용하지 않는다.
 
-이거는 일일이 테스트 해봐야할듯
+그러나 매번 추가해서 사용하기 번거로운 상황이 벌어질수도 있는데, 항상 .css 파일에 넣어서 불러와야해! 할 수도 없다.
 
-```
-gap instead margin
+물론, css 파일에 해당 속성을 넣고 그 후에 불러와서 html코드에 추가해서 쓸 수도 있지만, 굉장히 효율적이지 못하다.
 
-clear_fix, flow_root with float
-```
-
-# Coustom values
-
-### 1. Using Arbitary Values
-
-While you can usually build crafted-design with set of contained css file, once you need to break that rule and use specific pixel of margin or padding
-
-of course you can use that specific pixel to add that pixel value in global css, but if you using that specific value during project only one time, it has not good efficiency. Also making that globall css hard
-
-In this case, if you find need to make style CSS code as `padding-top-77px`,
-use square bracket notation to generate a tailwind class with any arbitary value.
+기본 제공 속성 이외에도, 추가된 프로젝트 전용 속성 에도 `padding-top-77px`같은 요소는 없을듯 하며 이를 사용 하는 방법을 적어두고자 한다.
 
 ```javascript
 <div className="pt-[77px]">{data}</div>
 ```
 
-not only for pixel, you can use arbitary value in many case
+다음과 같이 기존 `padding-top`의 경우 `pt`를 이용하면 되고 그후 `[]`를 통해 이 안에 원하는 속성을 넣으면 된다.
 
 ```javascript
 <div className="bg-[#66a3b1]">{data}</div>
 ```
+
+그 외에도 pixel뿐만 아니라 다른 속성에도 적용할 수 있으며,
 
 Can combine aribitary value with interactive modifiers and responsive modifiers.
 
@@ -216,29 +189,12 @@ Can combine aribitary value with interactive modifiers and responsive modifiers.
 <div className="lg:bg-[#66a3b1] hover:bg-[#123456] ">{data}</div>
 ```
 
-### 2.Arbitary properties
+또한 반응형 속성에도 적용할 수 있다.
 
-when propeeties are not added in global.css add properties in square bracket notation to completely arbitary css
+#### 2.Arbitary properties
+
+추가되어 있지 않은 기본 속성인 경우에도 `[]`안에 넣어서 사용 가능하다.
 
 ```javascript
 <div className="[mask-type:luminance] hover:[mask-type:alpha]">{data}</div>
 ```
-
-### 3.Arbitary variants
-
-Lastly, create the corresponding `theme.config.tsx` file in your project's root directory.
-
-### No scrollbar but still exist scroll function
-
-Unfortunately, I couldn't find how to use `webkit` option in className of '<div/>',
-so, generally I used easiest way to put in 'global.css'
-
-```javascript
-.no_scroll_bar::-webkit-scrollbar {
-  display : none;
-  }
-```
-
-and then use that 'no_scroll_bar' which class have 'overflow scroll or auto' options.
-
-Then you can see no scroll bar, but have scroll function

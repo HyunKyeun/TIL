@@ -1,8 +1,8 @@
-## GIT 프로젝트1개, 원격저장소 2개 연결하기
+# GIT 프로젝트1개, 원격저장소 2개 연결하기
 
 ---
 
-### **첫번째 저장소 추가**
+## **첫번째 저장소 추가**
 
 ```
 $ git remote add origin git@github.com:깃헙공동아이디/1번repo이름.git
@@ -13,7 +13,7 @@ git push origin master -- 는 push를 origin이라는 위치에 master 브런치
 
 ---
 
-### **두번째 저장소 추가**
+## **두번째 저장소 추가**
 
 ```
 $ git remote add nhk git@github.com:깃헙내아이디/2번repo이름.git
@@ -23,7 +23,7 @@ nhk라는 별칭으로 두번째 원격 저장소 저장
 
 ---
 
-### **원격저장소 확인**
+## **원격저장소 확인**
 
 ```
 $ git remote -v
@@ -38,7 +38,7 @@ origin  git@github.com:공동아이디/1번.git (push)
 
 ---
 
-### **접속용 SSH접속키 발급 받기**
+## **접속용 SSH접속키 발급 받기**
 
 ```
 $ cd ~/.ssh
@@ -54,7 +54,7 @@ id_rsa id_rsa.pub nhk  nhk.pub
 
 ---
 
-### **ssh-keygen**
+## **ssh-keygen**
 
 ```
 $ ssh-keygen -t ed25519 -C "nhk"
@@ -110,7 +110,7 @@ github에 Add new SSH keys에 등록
 
 ---
 
-### **push하기**
+## **push하기**
 
 ```
 $ eval $(ssh-agent -s)

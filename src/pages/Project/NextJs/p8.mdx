@@ -1,0 +1,24 @@
+# 접근 제한자
+
+접근을 제한하기 위해 사용하는것. 클래스 , 인터페이스 등 멤버의 접근을 얘기한다.  
+Java에서의 접근자를 확인해보면
+
+- public : 외부 클래스가 자유롭게 사용하는것 (js : export class)
+- protected : 같은 패키지내애서는 사용 가능..
+- private : 외부에서 사용하지 않는다.
+
+즉 private를 사용 하게 되면
+
+```javascript
+ const hi = (msg) => {
+  public const add = () => {
+    const msg2 = `${msg} + ${"!"}`
+    return msg2;
+  }
+  const final = add(msg)
+  return final;
+}
+```
+
+위에서 만든 add는 hi 라는 함수 내에서만 사용할수 있으며, 밖에서 호출할수 없다.
+hi.add() 불가능
