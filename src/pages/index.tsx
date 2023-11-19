@@ -56,17 +56,15 @@ const MainPage: NextPage<any> = (props) => {
             >
               Blogs
             </div>
-            <div className="px-2 cursor-pointer hover:text-gray-600">
-              Archive
-            </div>
+      
           </div>
         </nav>
       </div>
       <main className="page__content">
         <section className="w-full">
           <div>
-            <div className="flex text-[32px] py-2">
-              신중을 기하는 프론트엔드 개발자
+            <div className="flex text-[24px] py-2">
+              It&#39;s me 
             </div>
           </div>
 
