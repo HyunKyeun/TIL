@@ -43,7 +43,7 @@ const ModalComTwo = (props: any) => {
             <div
               className="hover:cursor-pointer text-blue-600 underline"
               onClick={() => {
-                router.replace("https://github.com/HyunKyeun");
+                router.push("https://github.com/HyunKyeun");
               }}
             >
               https://github.com/HyunKyeun
