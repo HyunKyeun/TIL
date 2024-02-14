@@ -15,6 +15,7 @@ import githubIMG from "../../public/img/github.png";
 import blogIMG from "../../public/img/blog.png";
 import caryakIMG from "../../public/img/caryak.png";
 import portFolioIMG from "../../public/img/portfolio.png";
+import uberIMG from "../../public/img/uber.png";
 import CardCom from "@/modules/components/cardCom";
 import ModalComOne from "@/modules/modalProps/modalComOne";
 import ModalComTwo from "@/modules/modalProps/modalComTwo";
@@ -22,6 +23,7 @@ import SeeMoreCom from "@/modules/components/seeMoreCom";
 import ModalComThree from "@/modules/modalProps/modalComThree";
 import ModalComFour from "@/modules/modalProps/modalComFour";
 import Image from "next/image";
+import ModalComFive from "@/modules/modalProps/modalComFive";
 const MainPage: NextPage<any> = (props) => {
   /*********************************************************************
    * 1. Init Libs
@@ -219,6 +221,21 @@ const MainPage: NextPage<any> = (props) => {
                   width={120}
                   height={40}
                 />
+              </div>
+              <SeeMoreCom />
+            </div>
+            <div
+              className="w-[240px] h-[220px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
+              onClick={() => {
+                setModalContent(ModalComFive);
+                setModalOpen(true);
+              }}
+            >
+              <div className="flex w-full font-extrabold text-lg justify-center px-2">
+                What I did - (3)
+              </div>
+              <div className="flex justify-center px-4">
+                <Image src={uberIMG} alt="uber" width={120} height={40} />
               </div>
               <SeeMoreCom />
             </div>
