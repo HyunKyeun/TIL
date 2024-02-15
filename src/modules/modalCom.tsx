@@ -62,11 +62,26 @@ const ModalCom = (props: any) => {
                     <HiXMark
                       className="cursor-pointer"
                       onClick={() => {
+                        props.setDetail(false);
                         props.setModalOpen(false);
                       }}
                     />
                   </div>
                   {props.modalContent}
+
+                  {props.detail && (
+                    <>
+                      <div
+                        className="mt-2 border-b-2 flex justify-center w-full cursor-pointer"
+                        onClick={() => {
+                          props.setModalsDetailOpen(!props.modalsDetailOpen);
+                        }}
+                      >
+                        {props.modalsDetailOpen ? "Close" : "See Detail"}
+                      </div>
+                      {props.modalsDetailOpen && props.modalDetailContent}
+                    </>
+                  )}
                 </>
               </Dialog.Panel>
             </Transition.Child>

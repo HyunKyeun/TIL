@@ -24,6 +24,8 @@ import ModalComThree from "@/modules/modalProps/modalComThree";
 import ModalComFour from "@/modules/modalProps/modalComFour";
 import Image from "next/image";
 import ModalComFive from "@/modules/modalProps/modalComFive";
+import ModalComFiveDetail from "@/modules/modalProps/modalComFiveDetail";
+import ModalComThreeDetail from "@/modules/modalProps/modalComThreeDetail";
 const MainPage: NextPage<any> = (props) => {
   /*********************************************************************
    * 1. Init Libs
@@ -32,15 +34,22 @@ const MainPage: NextPage<any> = (props) => {
   /*********************************************************************
    * 2. State settings
    *********************************************************************/
-
+  const [detail, setDetail] = useState(false);
   const [scroll, setScroll] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<any>();
+  const [modalDetailContent, setModalDetailContent] = useState<any>();
+  const [modalsDetailOpen, setModalsDetailOpen] = useState(false);
 
   let modalProps = {
     modalOpen: modalOpen,
     setModalOpen: setModalOpen,
     modalContent: modalContent,
+    modalDetailContent: modalDetailContent,
+    modalsDetailOpen: modalsDetailOpen,
+    setModalsDetailOpen: setModalsDetailOpen,
+    detail: detail,
+    setDetail: setDetail,
   };
   /*********************************************************************
    * 3. Handlers
@@ -156,6 +165,7 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className="w-[240px] h-[140px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
               onClick={() => {
+                setDetail(false);
                 setModalContent(ModalComOne);
                 setModalOpen(true);
               }}
@@ -172,6 +182,7 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className="w-[240px] h-[200px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
               onClick={() => {
+                setDetail(false);
                 setModalContent(ModalComTwo);
                 setModalOpen(true);
               }}
@@ -192,7 +203,10 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className="w-[240px] h-[260px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
               onClick={() => {
+                setDetail(true);
+                setModalsDetailOpen(false);
                 setModalContent(ModalComThree);
+                setModalDetailContent(ModalComThreeDetail);
                 setModalOpen(true);
               }}
             >
@@ -207,6 +221,8 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className="w-[240px] h-[220px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
               onClick={() => {
+                setDetail(false);
+
                 setModalContent(ModalComFour);
                 setModalOpen(true);
               }}
@@ -227,7 +243,10 @@ const MainPage: NextPage<any> = (props) => {
             <div
               className="w-[240px] h-[220px] bg-white m-2 font-sans flex flex-col justify-between rounded-md"
               onClick={() => {
+                setDetail(true);
+                setModalsDetailOpen(false);
                 setModalContent(ModalComFive);
+                setModalDetailContent(ModalComFiveDetail);
                 setModalOpen(true);
               }}
             >

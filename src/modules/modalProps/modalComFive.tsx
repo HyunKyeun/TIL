@@ -2,7 +2,7 @@ import { classNames } from "@/modules/common.modules";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { NextRouter, useRouter } from "next/router";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import uberIMG from "../../../public/img/uber.png";
 
 const ModalComFive = (props: any) => {
@@ -13,7 +13,7 @@ const ModalComFive = (props: any) => {
   /*********************************************************************
    * 2. State settings
    *********************************************************************/
-
+  console.log(props);
   /*********************************************************************
    * 3. Handlers
    *********************************************************************/

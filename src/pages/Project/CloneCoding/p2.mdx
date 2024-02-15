@@ -1,0 +1,129 @@
+# GIT 프로젝트1개, 원격저장소 2개 연결하기
+
+---
+
+## **첫번째 저장소 추가**
+
+```
+$ git remote add origin git@github.com:깃헙공동아이디/1번repo이름.git
+```
+
+git push origin master -- 는 push를 origin이라는 위치에 master 브런치로 하겠다는 뜻이다.  
+즉 두개의 원격저장소에 push하기 위에선 두번째 저장소의 경우 origin이 아니면 된다.
+
+---
+
+## **두번째 저장소 추가**
+
+```
+$ git remote add nhk git@github.com:깃헙내아이디/2번repo이름.git
+```
+
+nhk라는 별칭으로 두번째 원격 저장소 저장
+
+---
+
+## **원격저장소 확인**
+
+```
+$ git remote -v
+
+==
+
+nhk   git@github.com:내아이디/2번.git (fetch)
+nhk   git@github.com:내아이디/2번.git (push)
+origin  git@github.com:공동아이디/1번.git (fetch)
+origin  git@github.com:공동아이디/1번.git (push)
+```
+
+---
+
+## **접속용 SSH접속키 발급 받기**
+
+```
+$ cd ~/.ssh
+```
+
+.ssh 디렉토리에서 ls 로 id_ed25519와 id_ed25519.pub 혹은 id_rsa와 id_rsa.pub 파일이 있는지 확인
+
+```
+id_rsa id_rsa.pub nhk  nhk.pub
+```
+
+새로운 아이디로 접속해야하기 때문에 ssh-keygen으로 생성
+
+---
+
+## **ssh-keygen**
+
+```
+$ ssh-keygen -t ed25519 -C "nhk"
+or
+$ ssh-keygen -t rsa -b 4096 -C "nhk"
+
+```
+
+nhk, nhk.pub라는 파일을 생성
+
+```
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+
+패스워드 유무 (패스워드 설정을 권장하나 패스)
+
+```
++--[ED25519 256]--+
+|      ..*oXo     |
+|     . +o*.=     |
+|    ...o+o=o     |
+|   .  +o=+o+.    |
+|.o  .o +S=. ..  .|
+|+ .o+   + ..  E o|
+|.o.o.    .   . o |
+|..+              |
+|.o..             |
++----[SHA256]-----+
+```
+
+SSH키 생성 완료
+
+---
+
+### **ssh키 등록하기**
+
+```
+$ cat nhk
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmU333AAAEBbytj4mVV9mVV9QBnssl
+9TRW4N2p3frl95UFpQtnRn5sDkKeg6cFpnLH0iKeg6cFpnLH0iNyBQDGc9
+fbxQyNTUxOQAAACDoOnBaZyx9IjcgU6ZW1haWxAZXhhbXBsZS5jb20BAgM
+EBQYHbQAAAAtzc2gtZWQyNTUxOQAAACDDPovBM9gdlFbT8f0gZP5AAAAF
+nlvdXJfZW1haiAAAEBbytj4mVV9QBnssl9TRW4N2p3DPovBM9gdl0gZP5A
+AAAFnlvdXJfZW1haWS5jb20BAgMEBQYHQyNTUxOQAAACDoOnBaZyx9Ijcg
+U6ZW1haWxAZXhhbXBmVV9QBnssl9TRW4N2p3fV9QBnssl9TRW4N2p3frl9
+5UFpx9IjcgU6ZW1haWxAZXhhbXBsZS5jb20BAgMEBQYHbQAAAAtzytj4mV
+-----END OPENSSH PRIVATE KEY-----
+```
+
+github에 Add new SSH keys에 등록
+
+---
+
+## **push하기**
+
+```
+$ eval $(ssh-agent -s)
+$ ssh-add /home/dev/.ssh/nhk
+$ git add .
+$ git commit -ma
+$ git push nhk
+
+$ eval $(ssh-agent -s)
+$ ssh-add /home/dev/.ssh/id_rsa
+$ git add .
+$ git commit -ma
+$ git push origin main
+```
+
+두번째ssh로 접속하여 두번째 저장소에 먼저 push후, 첫번째 ssh로 접속하여 첫번째 저장소에 저장
